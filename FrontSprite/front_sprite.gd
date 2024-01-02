@@ -29,3 +29,4 @@ func animate_sprite() -> void:
 	tween.tween_property(self, "rotation", get_random_rotation(), get_random_spin_duration())
 	tween.tween_property(self, "rotation", get_random_rotation(), get_random_spin_duration())
 	tween.tween_property(self, "scale", REDUCTION_SCALE_FACTOR, SCALE_DURATION)
+	tween.tween_callback(animate_sprite)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mjqkiqui44w8"]
+[gd_scene load_steps=10 format=3 uid="uid://mjqkiqui44w8"]
 
 [ext_resource type="LabelSettings" uid="uid://cye4ts5vx0wlc" path="res://assets/fonts/GM_32_Dark.tres" id="1_5lcjl"]
 [ext_resource type="Script" path="res://game_scene/game_scene.gd" id="1_48d5g"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dkqs8wjwlrq28" path="res://assets/ui/green_button00.png" id="4_3lnxy"]
 [ext_resource type="LabelSettings" uid="uid://dc2orsolp3ye1" path="res://assets/fonts/GM_32_White.tres" id="5_i2ukt"]
 [ext_resource type="PackedScene" uid="uid://dctdhbp2ynwcr" path="res://scorer/scorer.tscn" id="8_tivkg"]
+[ext_resource type="PackedScene" uid="uid://jpxllno0lk5i" path="res://game_over/game_over.tscn" id="9_jopyr"]
 
 [node name="GameScene" type="Control"]
 layout_mode = 3
@@ -73,7 +74,7 @@ text = "Pairs:
 "
 label_settings = ExtResource("1_5lcjl")
 
-[node name="ParisAmountLabel" type="Label" parent="HBoxContainer/MarginContainerTextLabels/VBoxContainer/HBoxContainer2"]
+[node name="PairsAmountLabel" type="Label" parent="HBoxContainer/MarginContainerTextLabels/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "0 / 00
 "
@@ -106,5 +107,9 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Scorer" parent="." instance=ExtResource("8_tivkg")]
+
+[node name="GameOver" parent="." instance=ExtResource("9_jopyr")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="HBoxContainer/MarginContainerTextLabels/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

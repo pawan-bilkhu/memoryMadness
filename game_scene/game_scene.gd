@@ -3,7 +3,9 @@ extends Control
 @export var memory_tile_scene: PackedScene
 @onready var tile_container = $HBoxContainer/MarginContainerTiles/TileContainer
 @onready var audio_stream_player = $AudioStreamPlayer
-@onready var scorer = $Scorer
+@onready var scorer: Scorer = $Scorer
+@onready var moves_amount_label = $HBoxContainer/MarginContainerTextLabels/VBoxContainer/HBoxContainer/MovesAmountLabel
+@onready var pairs_amount_label = $HBoxContainer/MarginContainerTextLabels/VBoxContainer/HBoxContainer2/PairsAmountLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +14,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	moves_amount_label.text = scorer.get_moves_made_str()
+	pairs_amount_label.text = scorer.get_pairs_made_str()
 	
 func generate_memory_tile(item_image_dictionary: Dictionary, image: CompressedTexture2D) -> void:
 	var new_tile = memory_tile_scene.instantiate()

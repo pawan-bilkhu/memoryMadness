@@ -1,5 +1,7 @@
 extends Node
 
+class_name Scorer
+
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var reveal_timer = $RevealTimer
 
@@ -19,6 +21,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func get_moves_made_str() -> String:
+	return str(_moves_made)
+
+
+func get_pairs_made_str() -> String:
+	return '%s / %s' % [_pairs_made, _target_pairs]
+
 
 func clear_new_game(target_pairs: int ) -> void:
 	_selections.clear()
@@ -58,6 +69,11 @@ func hide_selections() -> void:
 	for tile in _selections:
 		tile.display_item(false)
 
+
+func check_game_over() -> void:
+	if _pairs_made >= _target_pairs:
+		SignalManager.on_game_over.emit(_moves_made)
+
 func on_tile_selected(tile: MemoryTile) -> void:
 	SoundManager.on_tile_pressed(audio_stream_player)
 	check_pair_made(tile)
@@ -67,6 +83,7 @@ func _on_reveal_timer_timeout():
 	if not successful_pair():
 		hide_selections()
 	_selections.clear()
+	check_game_over()
 	SignalManager.on_selection_enabled.emit()
 
 func on_exit_game_pressed() -> void:
